@@ -1,0 +1,26 @@
+//Version
+
+^4.19.2s
+1st part -> 4
+2nd part -> 19
+3rd part -> 2
+
+//3rd part are minor fixes (optional)
+//npmjs.com 
+
+//2nd part 19 is the recommended bug fix, security fix
+
+//1st part is the major release - Major / Breaking update .. (donot update)
+
+so what does the caret symbol mean??
+^Compatible with version...
+
+express = ^4.19.2
+4th version, 19th bugfix release, and 2nd minor fix release..
+
+so caret symbol lets you install npm versions less than the (n+1.0.0) if your current version is (n.x.y) 
+^- install all minor fixes and bug fix releases... but don't for the major release...
+
+
+~ - install only the minor fixess...
+~4.18.2 (4.18.x) x is the only possible variable here...
