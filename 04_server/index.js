@@ -8,7 +8,9 @@ const myServer = http.createServer((req, res) => {
   if (req.url === "/favicon.ico") {
     return res.end();
   }
-  const log = `${new Date().toISOString()}: ${req.url} New Req Received!\n`;
+  const log = `${new Date().toISOString()}:${req.method} ${
+    req.url
+  } New Req Received!\n`;
   const myUrl = url.parse(req.url);
   console.log(myUrl);
 
@@ -22,7 +24,7 @@ const myServer = http.createServer((req, res) => {
   // Handle different routes
   switch (myUrl.pathname) {
     case "/":
-      res.end("HomePage");
+      if (req.method == "GET") res.end("HomePage with a get method...");
       break;
     case "/about":
       const query = querystring.parse(myUrl.query);
@@ -33,6 +35,11 @@ const myServer = http.createServer((req, res) => {
       const search = querystring.parse(myUrl.query);
       const searchTerm = search.q || "No search term provided";
       res.end(`You searched for ${searchTerm}`);
+    case "/signup":
+      if (req.method == "GET") res.end("your get request is received...");
+      else if (req.method === "POST") {
+        res.end("Your post request is received....");
+      }
     default:
       res.end("404 Page");
   }
