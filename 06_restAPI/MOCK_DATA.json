@@ -1,53 +1,5 @@
 [
   {
-    "id": 1,
-    "first_name": "Jarvis",
-    "last_name": "Bordman",
-    "email": "jbordman0@1688.com",
-    "gender": "Male",
-    "job_title": "Business Systems Development Analyst"
-  },
-  {
-    "id": 2,
-    "first_name": "Jane",
-    "last_name": "Kumar",
-    "email": "johnKumar@gmail.com",
-    "gender": "female",
-    "job_title": "Plumber"
-  },
-  {
-    "id": 3,
-    "first_name": "Edit",
-    "last_name": "Kumar",
-    "email": "editeddata@gmail.com",
-    "gender": "prefer not to say",
-    "job_title": "Versatile"
-  },
-  {
-    "id": 4,
-    "first_name": "Cheslie",
-    "last_name": "Sanchiz",
-    "email": "csanchiz3@fema.gov",
-    "gender": "Female",
-    "job_title": "Accountant IV"
-  },
-  {
-    "id": 5,
-    "first_name": "Loretta",
-    "last_name": "O'Bradden",
-    "email": "lobradden4@prlog.org",
-    "gender": "Female",
-    "job_title": "Database Administrator I"
-  },
-  {
-    "id": 6,
-    "first_name": "Lurette",
-    "last_name": "Stiebler",
-    "email": "lstiebler5@odnoklassniki.ru",
-    "gender": "Female",
-    "job_title": "Product Engineer"
-  },
-  {
     "id": 7,
     "first_name": "Alaric",
     "last_name": "Sellar",
@@ -7990,53 +7942,5 @@
     "email": "atrimmerq@house.gov",
     "gender": "Polygender",
     "job_title": "Analyst Programmer"
-  },
-  {
-    "id": 1000,
-    "first_name": "Abbe",
-    "last_name": "Dinwoodie",
-    "email": "adinwoodierr@wunderground.com",
-    "gender": "Male",
-    "job_title": "Software Consultant"
-  },
-  {
-    "first_name": "Sabin",
-    "last_name": "Shrestha",
-    "email": "sabin.shrestha.er@gmail.com",
-    "gender": "male",
-    "job_title": "student",
-    "id": 1001
-  },
-  {
-    "first_name": "John",
-    "last_name": "Kumar",
-    "email": "johnKumar@gmail.com",
-    "gender": "Male",
-    "job_title": "Plumber",
-    "id": 1002
-  },
-  {
-    "first_name": "Jane",
-    "last_name": "Kumar",
-    "email": "johnKumar@gmail.com",
-    "gender": "female",
-    "job_title": "Plumber",
-    "id": 1003
-  },
-  {
-    "first_name": "Jane",
-    "last_name": "Kumar",
-    "email": "johnKumar@gmail.com",
-    "gender": "female",
-    "job_title": "Plumber",
-    "id": 1004
-  },
-  {
-    "first_name": "Jane",
-    "last_name": "Kumar",
-    "email": "johnKumar@gmail.com",
-    "gender": "female",
-    "job_title": "Plumber",
-    "id": 1005
   }
 ]

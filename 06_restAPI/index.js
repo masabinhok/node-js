@@ -56,7 +56,37 @@ app
     }
   })
   .delete((req, res) => {
-    return res.json({ status: "Pending" });
+    const body = req.body;
+    const id = body.id;
+
+    if (!id) {
+      return res.json({ status: "failed", message: "Id do not exist!" });
+    }
+
+    
+
+    const index = users.findIndex((user) => user.id == id);
+
+    if (index === -1) {
+      return res.json({ status: 'failed', message: 'User not found' });
+  }
+
+
+
+    users.splice(index, 1);
+
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users, null, 2), (err) => {
+      if (err) {
+        return res.json({
+          status: "failed",
+          message: "Failed to update the file!",
+        });
+      }
+      return res.json({
+        status: "success",
+        message: "User deleted successfully!",
+      });
+    });
   });
 
 app.post("/api/users", (req, res) => {
