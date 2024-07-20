@@ -9,19 +9,19 @@
   },
   {
     "id": 2,
-    "first_name": "Cassie",
-    "last_name": "Artus",
-    "email": "cartus1@archive.org",
-    "gender": "Female",
-    "job_title": "Food Chemist"
+    "first_name": "Jane",
+    "last_name": "Kumar",
+    "email": "johnKumar@gmail.com",
+    "gender": "female",
+    "job_title": "Plumber"
   },
   {
     "id": 3,
-    "first_name": "Merry",
-    "last_name": "Pieterick",
-    "email": "mpieterick2@tamu.edu",
-    "gender": "Female",
-    "job_title": "Help Desk Operator"
+    "first_name": "Edit",
+    "last_name": "Kumar",
+    "email": "editeddata@gmail.com",
+    "gender": "prefer not to say",
+    "job_title": "Versatile"
   },
   {
     "id": 4,

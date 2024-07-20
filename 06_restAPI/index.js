@@ -36,7 +36,24 @@ app
     return res.json(user);
   })
   .patch((req, res) => {
-    return res.json({ status: "Pending" });
+    const body = req.body;
+    const id = body.id;
+
+    const user = users.find((user) => user.id == id);
+
+    user.first_name = body.first_name;
+    user.last_name = body.last_name;
+    user.email = body.email;
+    user.job_title = body.job_title;
+    user.gender = body.gender;
+
+    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
+      return res.json({ status: "success", user: user });
+    });
+
+    if (!user) {
+      return res.json({ status: "failed" });
+    }
   })
   .delete((req, res) => {
     return res.json({ status: "Pending" });
