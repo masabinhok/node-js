@@ -7998,5 +7998,45 @@
     "email": "adinwoodierr@wunderground.com",
     "gender": "Male",
     "job_title": "Software Consultant"
+  },
+  {
+    "first_name": "Sabin",
+    "last_name": "Shrestha",
+    "email": "sabin.shrestha.er@gmail.com",
+    "gender": "male",
+    "job_title": "student",
+    "id": 1001
+  },
+  {
+    "first_name": "John",
+    "last_name": "Kumar",
+    "email": "johnKumar@gmail.com",
+    "gender": "Male",
+    "job_title": "Plumber",
+    "id": 1002
+  },
+  {
+    "first_name": "Jane",
+    "last_name": "Kumar",
+    "email": "johnKumar@gmail.com",
+    "gender": "female",
+    "job_title": "Plumber",
+    "id": 1003
+  },
+  {
+    "first_name": "Jane",
+    "last_name": "Kumar",
+    "email": "johnKumar@gmail.com",
+    "gender": "female",
+    "job_title": "Plumber",
+    "id": 1004
+  },
+  {
+    "first_name": "Jane",
+    "last_name": "Kumar",
+    "email": "johnKumar@gmail.com",
+    "gender": "female",
+    "job_title": "Plumber",
+    "id": 1005
   }
 ]
