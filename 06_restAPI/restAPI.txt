@@ -1,0 +1,44 @@
+restful api
+
+hota kya he??
+how is it different form other apiii
+
+ruless >>>>
+best practices >>>
+
+#server xa euta, client pani xaa...
+the client can be anything... 
+server ra client chai request response cycle ma communicate garxa...
+they should maintain some standards, with some rules or best practices which rest API providess...
+
+#industrylevelapplication...
+
+1. Server-Client architecturee..
+
+they should not be dependent of each other....
+client le server ma data rq garxa, server le data base bata data fetch garera json format ma raw data send garxa...
+json vaneko key value pair ho...
+client reads json... and will render the data on its own screen independent of the server..
+
+
+2. Always respect all HTTP methods...
+
+jiska jo kaam he usse usi ke liye use karooo...
+GET /user - users data read karo and return data.
+POST /user - handle new user creation.
+PATCH /user - update the user.
+//not the right wayy..
+POST /createUser - create user...
+POST /updateUser - user update ??
+
+
+1. client - browser (send html) if(MERN) (send JSON)
+2. respect HTTP methods...
+
+
+html rendering is fast.. SSR
+JSON rendering is comparatively slow.. CSR
+
+
+
+
