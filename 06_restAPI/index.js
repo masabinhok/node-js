@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 });
 
 app.use((req, res, next) => {
-  console.log("Hello from the middleware 2", req.myUserName);
+  console.log("Hello from the middleware 2");
 
   next();
 });
@@ -42,8 +42,8 @@ app.get("/users", (req, res) => {
 });
 
 app.get("/api/users", (req, res) => {
-  console.log("I am in route/get", req.myUserName);
-  return res.json(users);
+  res.setHeader("X-MyName", "SabinShrestha"); //always add x to custom headers....
+  res.send(users);
 });
 
 app

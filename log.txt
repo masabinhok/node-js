@@ -6,3 +6,10 @@
 1721573049433 : DELETE : /api/users/324
 1721573060362 : DELETE : /api/users
 1721573085689 : DELETE : /api/users
+1721581427700 : DELETE : /api/users
+1721581437421 : GET : /api/users
+1721581441463 : GET : /api/users
+1721581461475 : GET : /api/users
+1721581570617 : GET : /api/users
+1721581662496 : GET : /api/users
+1721581689859 : GET : /api/users
