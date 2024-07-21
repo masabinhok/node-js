@@ -1,0 +1,10 @@
+Status codes
+
+
+indicates whether the HTTP response, has been successful or failed ??
+
+1xx - informational response
+2xx - successful response
+3xx - redirection messages
+4xx - client side response
+5xx - server side response

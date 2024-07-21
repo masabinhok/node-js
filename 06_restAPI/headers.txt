@@ -1,5 +1,1 @@
 HTTP headers are the additional information about the request and response body, or say a field of an HTTP request or response that passes additional context and metadata about the request or response. For example, a rq message can use header to indicate it's preferred media formats, while a resonse can use header to indicate the media format of the returned body...
-
-
-//real word exampless..
-
