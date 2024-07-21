@@ -1,0 +1,34 @@
+middleware
+
+client rq grxa.. express server ma aauxa tyo rq, and express will check for which function to run .. 
+and our server will send the response and the rr cycle ends
+
+
+client - middleware - server/function
+
+what does middleware do??? 
+rq goes to middleware before the server, middleware can perform any type of processing to the rq, 
+who is the requester? validate the data... 
+if everything is ok, forwards the rq to the server...
+
+maybe middleware found some suspicious client, or couldnot validate then the rq is revert back, and the rq response cycle ends... 
+
+
+
+client - mw1 - mw2 - mw2 - server
+
+mw1- is the client safe
+mw2 - authorization garna sakxaa
+mw3 - resolves rq and sends you responseee..
+
+middleware acts as a middleman or say plugin, has access to rq and response, can process them, checks for safety, validates user credentials and many moree..
+
+OFFICIAL DOCUMENTATION
+
+middleware funcitons are functions that have access to rq res, and next middlware..
+execute and code, 
+make changes to your rq response,
+edit the rq res cycle...
+can call another middleware functionn...
+
+

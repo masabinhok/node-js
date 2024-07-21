@@ -8,6 +8,23 @@ const PORT = 8000;
 //middleware = assume it as a plugin
 app.use(express.urlencoded({ extended: false }));
 
+//middlewares
+app.use((req, res, next) => {
+  fs.appendFile(
+    "log.txt",
+    `${Date.now()} : ${req.method} : ${req.path}\n`,
+    (err, data) => {
+      next();
+    }
+  );
+});
+
+app.use((req, res, next) => {
+  console.log("Hello from the middleware 2", req.myUserName);
+
+  next();
+});
+
 //Routes
 app.get("/users", (req, res) => {
   const html = `
@@ -25,6 +42,7 @@ app.get("/users", (req, res) => {
 });
 
 app.get("/api/users", (req, res) => {
+  console.log("I am in route/get", req.myUserName);
   return res.json(users);
 });
 
@@ -63,15 +81,11 @@ app
       return res.json({ status: "failed", message: "Id do not exist!" });
     }
 
-    
-
     const index = users.findIndex((user) => user.id == id);
 
     if (index === -1) {
-      return res.json({ status: 'failed', message: 'User not found' });
-  }
-
-
+      return res.json({ status: "failed", message: "User not found" });
+    }
 
     users.splice(index, 1);
 
