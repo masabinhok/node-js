@@ -1,2 +1,0 @@
-1721583173866 : GET : /api/users
-1721583182460 : POST : /api/users

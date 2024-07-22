@@ -1,115 +1,27 @@
 const express = require("express");
-const users = require("./MOCK_DATA.json");
 
-const fs = require("fs");
+const userRouter = require("./routes/user");
+const { connectMongoDb } = require("./connection");
+const { logReqRes } = require("./middlewares/index");
+
 const app = express();
 const PORT = 8000;
+
+//connect to mongodb
+connectMongoDb("mongodb://127.0.0.1:27017/sabinDB").then(() => {
+  console.log("Connected to mongodb");
+});
 
 //middleware = assume it as a plugin
 app.use(express.urlencoded({ extended: false }));
 
 //middlewares
-app.use((req, res, next) => {
-  fs.appendFile(
-    "log.txt",
-    `${Date.now()} : ${req.method} : ${req.path}\n`,
-    (err, data) => {
-      next();
-    }
-  );
-});
+app.use(logReqRes("log.txt  "));
 
-app.use((req, res, next) => {
-  console.log("Hello from the middleware 2");
 
-  next();
-});
 
-//Routes
-app.get("/users", (req, res) => {
-  const html = `
-  <ul>
-  ${users
-    .map(
-      (user) => `
-    <li>${user.first_name} ${user.last_name}</li>
-    `
-    )
-    .join("")}
-  </ul>
-  `;
-  res.send(html);
-});
-
-app.get("/api/users", (req, res) => {
-  res.setHeader("X-MyName", "SabinShrestha"); //always add x to custom headers....
-  res.send(users);
-});
-
-app
-  .route("/api/users/:id")
-  .get((req, res) => {
-    const id = Number(req.params.id);
-    const user = users.find((user) => user.id == id);
-    return res.json(user);
-  })
-  .patch((req, res) => {
-    const body = req.body;
-    const id = body.id;
-
-    const user = users.find((user) => user.id == id);
-
-    user.first_name = body.first_name;
-    user.last_name = body.last_name;
-    user.email = body.email;
-    user.job_title = body.job_title;
-    user.gender = body.gender;
-
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-      return res.json({ status: "success", user: user });
-    });
-
-    if (!user) {
-      return res.json({ status: "failed" });
-    }
-  })
-  .delete((req, res) => {
-    const body = req.body;
-    const id = body.id;
-
-    if (!id) {
-      return res.json({ status: "failed", message: "Id do not exist!" });
-    }
-
-    const index = users.findIndex((user) => user.id == id);
-
-    if (index === -1) {
-      return res.json({ status: "failed", message: "User not found" });
-    }
-
-    users.splice(index, 1);
-
-    fs.writeFile("./MOCK_DATA.json", JSON.stringify(users, null, 2), (err) => {
-      if (err) {
-        return res.json({
-          status: "failed",
-          message: "Failed to update the file!",
-        });
-      }
-      return res.json({
-        status: "success",
-        message: "User deleted successfully!",
-      });
-    });
-  });
-
-app.post("/api/users", (req, res) => {
-  const body = req.body;
-  users.push({ ...body, id: users.length + 1 });
-  fs.writeFile("./MOCK_DATA.json", JSON.stringify(users), (err, data) => {
-    return res.status(201).json({ status: "Success ", id: users.length });
-  });
-});
+//registering routes
+app.use("/api/users", userRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
