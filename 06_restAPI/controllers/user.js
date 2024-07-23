@@ -41,7 +41,7 @@ async function handleCreateNewUser(req, res) {
     !body.job_title ||
     !body.gender
   ) {
-    return res.status(400).json({ message: "ALl fields are required!" });
+    return res.status(400).json({ message: "All fields are required!" });
   }
 
   const result = await User.create({

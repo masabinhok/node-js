@@ -1,27 +1,32 @@
+const shortid = require("shortid");
+
 const URL = require("../models/url");
-const shortid = require("shortid"); // This package helps to create unique IDs
 
-async function handleCreateShortUrl(req, res) {
-  const { redirectURL } = req.body;
-  if (!redirectURL) {
-    return res.status(400).json({ error: "URL is required" });
-  }
+async function handleGenerateNewShortURL(req, res) {
+  const body = req.body;
+  if (!body.url) return res.status(400).json({ message: "URL is required" });
 
-  const shortId = shortid.generate();
+  const shortID = shortid();
 
-  const newURL = new URL({
-    shortId,
-    redirectURL,
+  await URL.create({
+    shortId: shortID,
+    redirectURL: body.url,
     visitHistory: [],
   });
-
-  try {
-    await newURL.save();
-    return res.status(201).json({ shortId, redirectURL });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ error: "Internal Server Error" });
-  }
+  return res.json({ shortID });
 }
 
-module.exports = { handleCreateShortUrl };
+async function handleGetAnalytics(req, res) {
+  const shortId = req.params.shortId;
+  const result = await URL.findOne({ shortId });
+
+  return res.status(201).json({
+    totalClicks: result.visitHistory.length,
+    analytics: result.visitHistory,
+  });
+}
+
+module.exports = {
+  handleGenerateNewShortURL,
+  handleGetAnalytics,
+};
