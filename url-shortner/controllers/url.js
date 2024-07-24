@@ -29,7 +29,16 @@ async function handleGetAnalytics(req, res) {
   });
 }
 
+async function handleDeleteEntry(req, res) {
+  const shortId = req.params.shortId;
+  if (!shortId)
+    return res.status(400).json({ message: "Short ID is required" });
+  await URL.deleteOne({ shortId });
+  return res.json({ message: "Deleted" });
+}
+
 module.exports = {
   handleGenerateNewShortURL,
   handleGetAnalytics,
+  handleDeleteEntry,
 };
