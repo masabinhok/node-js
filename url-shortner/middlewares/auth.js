@@ -1,27 +1,50 @@
 const { getUser } = require("../service/auth");
 
 async function restrictToLoggedinUserOnly(req, res, next) {
-  const userUid = req.cookies?.uid;
+  const authHeader = req.headers["authorization"];
 
-  if (!userUid) {
+  if (!authHeader) {
     return res.redirect("/login");
   }
 
-  const user = getUser(userUid);
-
-  if (!user) {
+  const token = authHeader.split("Bearer ")[1];
+  if (!token) {
     return res.redirect("/login");
   }
 
-  req.user = user;
-  next();
+  try {
+    const user = await getUser(token);
+    if (!user) {
+      return res.redirect("/login");
+    }
+
+    req.user = user;
+    next();
+  } catch (error) {
+    console.error(error);
+    return res.redirect("/login");
+  }
 }
 
 async function checkAuth(req, res, next) {
-  const userUid = req.cookies?.uid;
-  const user = getUser(userUid);
+  const authHeader = req.headers["authorization"];
+  
+  if (!authHeader) {
+    return next();
+  }
 
-  req.user = user;
+  const token = authHeader.split("Bearer ")[1];
+  if (!token) {
+    return next();
+  }
+
+  try {
+    const user = await getUser(token);
+    req.user = user;
+  } catch (error) {
+    console.error(error);
+  }
+
   next();
 }
 
