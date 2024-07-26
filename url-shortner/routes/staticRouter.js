@@ -7,6 +7,7 @@ router.get("/", async (req, res) => {
   const allUrls = await URL.find({ createdBy: req.user._id });
   return res.render("home", {
     urls: allUrls,
+    user: req.user,
   });
 });
 
