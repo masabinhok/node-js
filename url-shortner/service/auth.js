@@ -5,6 +5,7 @@ const secretKey = "sabin!@#123";
 function setUser(user) {
   return jwt.sign(
     {
+      name: user.name,
       _id: user._id,
       email: user.email,
       role: user.role,

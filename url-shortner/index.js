@@ -29,7 +29,7 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 // Handle /url route
-app.use("/url", restrictTo(["NORMAL, ADMIN"]), urlRoute);
+app.use("/url", restrictTo(["NORMAL", "ADMIN"]), urlRoute);
 
 // Handle static routes
 app.use("/", staticRoute);

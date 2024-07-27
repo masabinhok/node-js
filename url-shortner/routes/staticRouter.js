@@ -7,12 +7,14 @@ router.get("/admin/urls", restrictTo(["ADMIN"]), async (req, res) => {
   const allUrls = await URL.find({});
   return res.render("home", {
     urls: allUrls,
+    user: req.user,
   });
 });
 
-router.get("/", restrictTo(["NORMAL, ADMIN"]), async (req, res) => {
+router.get("/", async (req, res) => {
   if (!req.user) return res.redirect("/login");
   const allUrls = await URL.find({ createdBy: req.user._id });
+  console.log(req.user);
   return res.render("home", {
     urls: allUrls,
     user: req.user,
