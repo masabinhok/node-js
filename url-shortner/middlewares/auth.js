@@ -1,54 +1,30 @@
 const { getUser } = require("../service/auth");
 
-async function restrictToLoggedinUserOnly(req, res, next) {
-  const authHeader = req.headers["authorization"];
-
-  if (!authHeader) {
-    return res.redirect("/login");
+function checkForAuthentication(req, res, next) {
+  const tokenCookie = req.cookies?.token;
+  req.user = null;
+  if (!tokenCookie) {
+    return next();
   }
+  const token = tokenCookie;
+  const user = getUser(token);
 
-  const token = authHeader.split("Bearer ")[1];
-  if (!token) {
-    return res.redirect("/login");
-  }
+  req.user = user;
+  return next();
+}
 
-  try {
-    const user = await getUser(token);
-    if (!user) {
+function restrictTo(roles = []) {
+  return function (req, res, next) {
+    if (!req.user) {
       return res.redirect("/login");
     }
 
-    req.user = user;
-    next();
-  } catch (error) {
-    console.error(error);
-    return res.redirect("/login");
-  }
-}
-
-async function checkAuth(req, res, next) {
-  const authHeader = req.headers["authorization"];
-  
-  if (!authHeader) {
+    if (!roles.includes(req.user.role)) return res.end("UnAuthorized");
     return next();
-  }
-
-  const token = authHeader.split("Bearer ")[1];
-  if (!token) {
-    return next();
-  }
-
-  try {
-    const user = await getUser(token);
-    req.user = user;
-  } catch (error) {
-    console.error(error);
-  }
-
-  next();
+  };
 }
 
 module.exports = {
-  restrictToLoggedinUserOnly,
-  checkAuth,
+  checkForAuthentication,
+  restrictTo,
 };

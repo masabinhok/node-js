@@ -1,7 +1,6 @@
 const express = require("express");
 const { connectToMongoDB } = require("./connect");
-
-const { restrictToLoggedinUserOnly, checkAuth } = require("./middlewares/auth");
+const { restrictTo, checkForAuthentication } = require("./middlewares/auth");
 const cookieParser = require("cookie-parser");
 
 const URL = require("./models/url");
@@ -23,16 +22,17 @@ const userRoute = require("./routes/user");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(checkForAuthentication);
 
 // EJS setup
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 // Handle /url route
-app.use("/url", restrictToLoggedinUserOnly, urlRoute);
+app.use("/url", restrictTo(["NORMAL, ADMIN"]), urlRoute);
 
 // Handle static routes
-app.use("/", checkAuth, staticRoute);
+app.use("/", staticRoute);
 
 //Handle user routes
 app.use("/user", userRoute);
@@ -47,8 +47,11 @@ app.get("/:shortid", async (req, res) => {
         $push: {
           visitHistory: { timestamp: new Date() },
         },
-      }
+      },
+      { new: true }
     );
+    console.log("Entry:", entry);
+
     res.redirect(entry.redirectURL);
   } catch (err) {
     console.error(err);

@@ -3,10 +3,14 @@ const jwt = require("jsonwebtoken");
 const secretKey = "sabin!@#123";
 
 function setUser(user) {
-  const payload = {
-    user,
-  };
-  return jwt.sign(payload, secretKey);
+  return jwt.sign(
+    {
+      _id: user._id,
+      email: user.email,
+      role: user.role,
+    },
+    secretKey
+  );
 }
 
 function getUser(token) {
